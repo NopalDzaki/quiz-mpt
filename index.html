@@ -1,0 +1,1744 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Latihan Soal - Manajemen Proyek Tangkas</title>
+    <meta
+      name="description"
+      content="Web quiz latihan soal UTS Manajemen Proyek Tangkas (ES234316). 180 soal dari 3 sumber berbeda."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ============================================ */
+      /* RESET & BASE                                */
+      /* ============================================ */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        /* Backgrounds */
+        --bg-primary: #f5f3eb;
+        --bg-dark: #262523;
+        --bg-bottom-sheet: #141414;
+        --bg-card-white: #ffffff;
+
+        /* Game Card Accents */
+        --orange-card: #f2a33a;
+        --sky-blue-card: #82cafa;
+        --sunny-yellow: #fcd144;
+        --mint-green: #d3e8df;
+
+        /* Mascot Colors */
+        --pink: #ff5e97;
+        --purple: #694fa6;
+        --yellow-mascot: #facc15;
+        --cyan: #38bdf8;
+
+        /* Interactive */
+        --action-green: #0e8366;
+        --correct-green: #6bb384;
+        --wrong-red: #e85d5d;
+        --dark-button: #111111;
+        --online-green: #34d399;
+        --highlight-blue: #67b7c7;
+        --coin-gold: #f59e0b;
+
+        /* Text */
+        --text-primary: #111111;
+        --text-secondary: #6b7280;
+        --text-on-dark: #ffffff;
+
+        /* Radius */
+        --radius-card: 36px;
+        --radius-pill: 9999px;
+        --radius-sheet: 36px;
+
+        /* Shadow */
+        --shadow-soft: 0px 8px 24px rgba(0, 0, 0, 0.06);
+        --shadow-medium: 0px 12px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family: "Plus Jakarta Sans", "Nunito", sans-serif;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* Subtle wave pattern bg */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background:
+          radial-gradient(
+            ellipse at 20% 50%,
+            rgba(242, 163, 58, 0.06) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 80% 20%,
+            rgba(130, 202, 250, 0.06) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 50% 80%,
+            rgba(255, 94, 151, 0.04) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* ============================================ */
+      /* LAYOUT                                      */
+      /* ============================================ */
+      .app {
+        position: relative;
+        z-index: 1;
+        max-width: 480px;
+        margin: 0 auto;
+        padding: 20px 20px 100px;
+        min-height: 100vh;
+      }
+
+      /* ============================================ */
+      /* SCREEN MANAGEMENT                           */
+      /* ============================================ */
+      .screen {
+        display: none;
+        animation: fadeSlideIn 0.4s ease-out;
+      }
+      .screen.active {
+        display: block;
+      }
+
+      @keyframes fadeSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes popIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        60% {
+          transform: scale(1.05);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      @keyframes shimmer {
+        0% {
+          background-position: -200% 0;
+        }
+        100% {
+          background-position: 200% 0;
+        }
+      }
+      @keyframes confetti {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-60px) rotate(360deg);
+          opacity: 0;
+        }
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.08);
+        }
+      }
+      @keyframes starTwinkle {
+        0%,
+        100% {
+          opacity: 0.3;
+          transform: scale(0.8);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.2);
+        }
+      }
+
+      /* ============================================ */
+      /* HOME SCREEN                                 */
+      /* ============================================ */
+      .home-header {
+        text-align: center;
+        margin-bottom: 28px;
+        padding-top: 20px;
+      }
+      .home-mascot {
+        font-size: 72px;
+        display: block;
+        margin-bottom: 12px;
+        animation: pulse 3s infinite ease-in-out;
+      }
+      .home-title {
+        font-family: "Poppins", sans-serif;
+        font-weight: 900;
+        font-style: italic;
+        font-size: 28px;
+        line-height: 1.15;
+        color: var(--text-primary);
+        margin-bottom: 4px;
+      }
+      .home-subtitle {
+        font-size: 13px;
+        color: var(--text-secondary);
+        font-weight: 500;
+      }
+      .home-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--bg-card-white);
+        border-radius: var(--radius-pill);
+        padding: 6px 14px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        box-shadow: var(--shadow-soft);
+        margin-top: 12px;
+      }
+      .home-badge .dot {
+        width: 8px;
+        height: 8px;
+        background: var(--online-green);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+      }
+
+      /* Section Title */
+      .section-title {
+        font-family: "Poppins", sans-serif;
+        font-weight: 800;
+        font-style: italic;
+        font-size: 22px;
+        margin-bottom: 16px;
+      }
+
+      /* ============================================ */
+      /* SOURCE CARDS (Game Selection)                */
+      /* ============================================ */
+      .source-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+      .source-card {
+        border-radius: var(--radius-card);
+        padding: 24px;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+        border: none;
+        text-align: left;
+        width: 100%;
+        font-family: inherit;
+      }
+      .source-card:hover {
+        transform: translateY(-4px) scale(1.01);
+        box-shadow: var(--shadow-medium);
+      }
+      .source-card:active {
+        transform: scale(0.98);
+      }
+      .source-card.claude {
+        background: var(--orange-card);
+      }
+      .source-card.gemini {
+        background: var(--sky-blue-card);
+      }
+      .source-card.chatgpt {
+        background: linear-gradient(135deg, var(--mint-green) 0%, #a8d4c0 100%);
+      }
+
+      .source-card-icon {
+        font-size: 48px;
+        margin-bottom: 12px;
+        display: block;
+      }
+      .source-card-name {
+        font-family: "Poppins", sans-serif;
+        font-weight: 800;
+        font-style: italic;
+        font-size: 24px;
+        color: var(--text-primary);
+        margin-bottom: 4px;
+        position: relative;
+        display: inline-block;
+      }
+      /* Sticker effect for card name */
+      .source-card-name::before {
+        content: "";
+        position: absolute;
+        inset: -4px -10px;
+        background: rgba(255, 255, 255, 0.45);
+        border-radius: 12px;
+        z-index: -1;
+      }
+      .source-card-desc {
+        font-size: 13px;
+        font-weight: 600;
+        color: rgba(17, 17, 17, 0.7);
+        margin-bottom: 12px;
+      }
+      .source-card-count {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: var(--radius-pill);
+        padding: 5px 12px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .source-card-play {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        background: var(--dark-button);
+        color: var(--text-on-dark);
+        border: none;
+        border-radius: var(--radius-pill);
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: background 0.2s;
+      }
+      .source-card-play:hover {
+        background: #333;
+      }
+
+      /* Decorative doodles */
+      .source-card::after {
+        content: "✦";
+        position: absolute;
+        top: 16px;
+        right: 20px;
+        font-size: 20px;
+        opacity: 0.3;
+        animation: starTwinkle 2s infinite;
+      }
+      .source-card.gemini::after {
+        animation-delay: 0.5s;
+      }
+      .source-card.chatgpt::after {
+        animation-delay: 1s;
+      }
+
+      /* ============================================ */
+      /* FILTER / CONFIG SCREEN                      */
+      /* ============================================ */
+      .config-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      .btn-back {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--bg-card-white);
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--shadow-soft);
+        transition: transform 0.2s;
+      }
+      .btn-back:hover {
+        transform: scale(1.1);
+      }
+      .config-source-name {
+        font-family: "Poppins", sans-serif;
+        font-weight: 800;
+        font-style: italic;
+        font-size: 22px;
+      }
+
+      .filter-section {
+        margin-bottom: 24px;
+      }
+      .filter-label {
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+        margin-bottom: 10px;
+        letter-spacing: 0.5px;
+      }
+      .filter-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .filter-pill {
+        border-radius: var(--radius-pill);
+        border: 2px solid #e0ddd4;
+        background: var(--bg-card-white);
+        padding: 8px 18px;
+        font-size: 14px;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        transition: all 0.2s;
+        color: var(--text-primary);
+      }
+      .filter-pill:hover {
+        border-color: var(--action-green);
+        background: rgba(14, 131, 102, 0.05);
+      }
+      .filter-pill.active {
+        background: var(--action-green);
+        border-color: var(--action-green);
+        color: var(--text-on-dark);
+      }
+
+      .config-summary {
+        background: var(--bg-card-white);
+        border-radius: var(--radius-card);
+        padding: 20px;
+        margin-bottom: 24px;
+        box-shadow: var(--shadow-soft);
+      }
+      .config-summary-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+      }
+      .config-summary-row + .config-summary-row {
+        border-top: 1px solid #f0ede5;
+      }
+      .config-summary-label {
+        font-size: 13px;
+        color: var(--text-secondary);
+        font-weight: 500;
+      }
+      .config-summary-value {
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .btn-start {
+        width: 100%;
+        background: var(--dark-button);
+        color: var(--text-on-dark);
+        border: none;
+        border-radius: var(--radius-pill);
+        padding: 16px;
+        font-size: 16px;
+        font-weight: 700;
+        font-family: inherit;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: all 0.25s;
+        box-shadow: var(--shadow-soft);
+      }
+      .btn-start:hover {
+        background: #333;
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-medium);
+      }
+      .btn-start:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      /* ============================================ */
+      /* QUIZ SCREEN                                 */
+      /* ============================================ */
+      .quiz-top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      .quiz-progress-text {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-secondary);
+      }
+      .quiz-source-pill {
+        background: var(--bg-card-white);
+        border-radius: var(--radius-pill);
+        padding: 5px 14px;
+        font-size: 12px;
+        font-weight: 700;
+        box-shadow: var(--shadow-soft);
+      }
+
+      /* Progress bar steps */
+      .progress-bar {
+        display: flex;
+        gap: 4px;
+        margin-bottom: 20px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+      .progress-bar::-webkit-scrollbar {
+        display: none;
+      }
+      .progress-step {
+        height: 6px;
+        border-radius: 3px;
+        background: #e0ddd4;
+        flex: 1;
+        min-width: 6px;
+        transition: background 0.3s;
+      }
+      .progress-step.done {
+        background: var(--correct-green);
+      }
+      .progress-step.wrong {
+        background: var(--wrong-red);
+      }
+      .progress-step.current {
+        background: var(--orange-card);
+        min-width: 18px;
+      }
+
+      /* Question Card */
+      .question-card {
+        background: var(--bg-card-white);
+        border-radius: var(--radius-card);
+        padding: 24px;
+        margin-bottom: 16px;
+        box-shadow: var(--shadow-soft);
+      }
+      .question-level-pill {
+        display: inline-block;
+        border-radius: var(--radius-pill);
+        padding: 4px 12px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        letter-spacing: 0.5px;
+      }
+      .question-level-pill.mudah {
+        background: rgba(52, 211, 153, 0.15);
+        color: #059669;
+      }
+      .question-level-pill.sedang {
+        background: rgba(245, 158, 11, 0.15);
+        color: #d97706;
+      }
+      .question-level-pill.sulit {
+        background: rgba(239, 68, 68, 0.15);
+        color: #dc2626;
+      }
+      .question-topic {
+        font-size: 12px;
+        color: var(--text-secondary);
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      .question-text {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1.5;
+      }
+
+      /* Options Container */
+      .options-container {
+        background: var(--sunny-yellow);
+        border-radius: 28px;
+        padding: 16px;
+        margin-bottom: 16px;
+      }
+      .option-pill {
+        background: var(--bg-card-white);
+        border-radius: var(--radius-pill);
+        padding: 14px 18px;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: 2px solid transparent;
+        position: relative;
+      }
+      .option-pill:last-child {
+        margin-bottom: 0;
+      }
+      .option-pill:hover:not(.disabled) {
+        transform: translateX(4px);
+        box-shadow: var(--shadow-soft);
+      }
+      .option-pill.selected {
+        border-color: var(--dark-button);
+        background: rgba(255, 255, 255, 0.9);
+      }
+      .option-pill.correct {
+        background: var(--correct-green) !important;
+        border-color: var(--correct-green) !important;
+        color: var(--text-on-dark) !important;
+      }
+      .option-pill.correct .option-letter {
+        background: rgba(255, 255, 255, 0.3) !important;
+        color: var(--text-on-dark) !important;
+      }
+      .option-pill.correct .option-text {
+        color: var(--text-on-dark) !important;
+      }
+      .option-pill.wrong {
+        background: var(--wrong-red) !important;
+        border-color: var(--wrong-red) !important;
+        color: var(--text-on-dark) !important;
+      }
+      .option-pill.wrong .option-letter {
+        background: rgba(255, 255, 255, 0.3) !important;
+        color: var(--text-on-dark) !important;
+      }
+      .option-pill.wrong .option-text {
+        color: var(--text-on-dark) !important;
+      }
+      .option-pill.disabled {
+        cursor: default;
+      }
+      .option-pill.disabled:hover {
+        transform: none;
+        box-shadow: none;
+      }
+      .option-pill.dimmed {
+        opacity: 0.5;
+      }
+
+      .option-letter {
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
+        border-radius: 50%;
+        background: rgba(14, 131, 102, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--action-green);
+        margin-top: 1px;
+      }
+      .option-text {
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.4;
+        color: var(--text-primary);
+      }
+
+      /* Explanation Card */
+      .explanation-card {
+        background: var(--bg-card-white);
+        border-radius: 24px;
+        padding: 20px;
+        margin-bottom: 16px;
+        box-shadow: var(--shadow-soft);
+        animation: fadeSlideIn 0.4s ease-out;
+      }
+      .explanation-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 14px;
+        font-family: "Poppins", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+      }
+      .explanation-header.correct {
+        color: #059669;
+      }
+      .explanation-header.wrong {
+        color: #dc2626;
+      }
+      .explanation-item {
+        padding: 8px 0;
+        font-size: 13px;
+        line-height: 1.5;
+        color: var(--text-secondary);
+      }
+      .explanation-item + .explanation-item {
+        border-top: 1px solid #f0ede5;
+      }
+      .explanation-item strong {
+        color: var(--text-primary);
+        font-weight: 700;
+      }
+      .explanation-item.is-answer strong {
+        color: #059669;
+      }
+
+      /* Action Buttons */
+      .quiz-action-bar {
+        display: flex;
+        gap: 10px;
+      }
+      .btn-submit {
+        flex: 1;
+        background: var(--dark-button);
+        color: var(--text-on-dark);
+        border: none;
+        border-radius: var(--radius-pill);
+        padding: 14px;
+        font-size: 15px;
+        font-weight: 700;
+        font-family: inherit;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+      .btn-submit:hover:not(:disabled) {
+        background: #333;
+        transform: translateY(-2px);
+      }
+      .btn-submit:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+      }
+      .btn-next {
+        flex: 1;
+        background: var(--action-green);
+        color: var(--text-on-dark);
+        border: none;
+        border-radius: var(--radius-pill);
+        padding: 14px;
+        font-size: 15px;
+        font-weight: 700;
+        font-family: inherit;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+      .btn-next:hover {
+        background: #0a6b53;
+        transform: translateY(-2px);
+      }
+
+      /* ============================================ */
+      /* RESULT SCREEN                               */
+      /* ============================================ */
+      .result-screen {
+        text-align: center;
+      }
+      .result-celebration {
+        background: var(--bg-dark);
+        border-radius: var(--radius-card);
+        padding: 40px 24px;
+        margin-bottom: 24px;
+        position: relative;
+        overflow: hidden;
+      }
+      .result-celebration::before {
+        content: "✦ ⭐ ✦";
+        position: absolute;
+        top: 14px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 20px;
+        letter-spacing: 12px;
+        opacity: 0.5;
+        animation: starTwinkle 2s infinite;
+      }
+      .result-mascot {
+        font-size: 80px;
+        display: block;
+        margin-bottom: 16px;
+        animation: popIn 0.6s ease-out;
+      }
+      .result-score-pill {
+        display: inline-block;
+        background: var(--coin-gold);
+        color: var(--text-primary);
+        border-radius: var(--radius-pill);
+        padding: 10px 28px;
+        font-family: "Poppins", sans-serif;
+        font-weight: 900;
+        font-size: 28px;
+        animation: popIn 0.6s ease-out 0.2s both;
+        box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+      }
+      .result-label {
+        color: var(--text-on-dark);
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 12px;
+        opacity: 0.8;
+      }
+      .result-message {
+        color: var(--text-on-dark);
+        font-family: "Poppins", sans-serif;
+        font-weight: 800;
+        font-style: italic;
+        font-size: 20px;
+        margin-top: 8px;
+      }
+
+      /* Stats */
+      .result-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 24px;
+      }
+      .stat-card {
+        background: var(--bg-card-white);
+        border-radius: 20px;
+        padding: 16px 10px;
+        box-shadow: var(--shadow-soft);
+      }
+      .stat-value {
+        font-family: "Poppins", sans-serif;
+        font-weight: 800;
+        font-size: 24px;
+        margin-bottom: 2px;
+      }
+      .stat-value.correct-val {
+        color: #059669;
+      }
+      .stat-value.wrong-val {
+        color: #dc2626;
+      }
+      .stat-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+      }
+
+      /* Review section in results */
+      .result-review-header {
+        background: var(--bg-bottom-sheet);
+        border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
+        padding: 20px 24px 12px;
+        margin: 0 -20px;
+      }
+      .result-review-header h3 {
+        font-family: "Poppins", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--text-on-dark);
+        text-transform: uppercase;
+      }
+      .result-review-body {
+        background: var(--bg-bottom-sheet);
+        padding: 0 24px 24px;
+        margin: 0 -20px;
+      }
+      .review-item {
+        background: var(--bg-card-white);
+        border-radius: 20px;
+        padding: 16px;
+        margin-bottom: 10px;
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .review-item:hover {
+        transform: translateX(4px);
+      }
+      .review-item.review-correct {
+        border-left: 4px solid var(--correct-green);
+      }
+      .review-item.review-wrong {
+        border-left: 4px solid var(--wrong-red);
+      }
+      .review-item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 6px;
+      }
+      .review-item-num {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-secondary);
+      }
+      .review-item-status {
+        font-size: 11px;
+        font-weight: 700;
+        border-radius: var(--radius-pill);
+        padding: 2px 10px;
+      }
+      .review-item-status.correct-status {
+        background: rgba(52, 211, 153, 0.15);
+        color: #059669;
+      }
+      .review-item-status.wrong-status {
+        background: rgba(239, 68, 68, 0.15);
+        color: #dc2626;
+      }
+      .review-item-question {
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.4;
+        color: var(--text-primary);
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .review-detail {
+        display: none;
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid #f0ede5;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+      .review-detail.open {
+        display: block;
+      }
+      .review-answer-row {
+        display: flex;
+        gap: 4px;
+        margin-bottom: 4px;
+      }
+      .review-answer-badge {
+        font-weight: 700;
+        font-size: 11px;
+        border-radius: var(--radius-pill);
+        padding: 1px 8px;
+      }
+
+      .btn-home {
+        width: 100%;
+        background: var(--action-green);
+        color: var(--text-on-dark);
+        border: none;
+        border-radius: var(--radius-pill);
+        padding: 16px;
+        font-size: 16px;
+        font-weight: 700;
+        font-family: inherit;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 20px;
+        transition: all 0.2s;
+      }
+      .btn-home:hover {
+        background: #0a6b53;
+        transform: translateY(-2px);
+      }
+
+      /* ============================================ */
+      /* PAGINATION DOTS                             */
+      /* ============================================ */
+      .pagination-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin: 20px 0;
+      }
+      .pagination-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--dark-button);
+        opacity: 0.2;
+        transition: all 0.3s;
+      }
+      .pagination-dot.active {
+        width: 24px;
+        border-radius: var(--radius-pill);
+        background: var(--pink);
+        opacity: 1;
+      }
+
+      /* ============================================ */
+      /* FLOATING BOTTOM BAR (decorative)            */
+      /* ============================================ */
+      .bottom-bar {
+        position: fixed;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--dark-button);
+        border-radius: var(--radius-pill);
+        padding: 6px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        z-index: 100;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      }
+      .bottom-bar-item {
+        border-radius: var(--radius-pill);
+        border: none;
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 16px;
+        transition: all 0.2s;
+      }
+      .bottom-bar-item.active-tab {
+        background: var(--action-green);
+        color: var(--text-on-dark);
+      }
+      .bottom-bar-item.inactive-tab {
+        background: var(--bg-card-white);
+        color: var(--text-primary);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        padding: 0;
+        justify-content: center;
+      }
+      .bottom-bar-item.inactive-tab:hover {
+        background: #f0f0f0;
+      }
+
+      /* ============================================ */
+      /* RESPONSIVE                                  */
+      /* ============================================ */
+      @media (max-width: 500px) {
+        .app {
+          padding: 16px 16px 90px;
+        }
+        .home-title {
+          font-size: 24px;
+        }
+        .source-card {
+          padding: 20px;
+        }
+        .source-card-name {
+          font-size: 20px;
+        }
+        .result-stats {
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 6px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <!-- ========== HOME SCREEN ========== -->
+      <div id="screen-home" class="screen active">
+        <div class="home-header">
+          <span class="home-mascot">📚</span>
+          <h1 class="home-title">Latihan Soal<br />MPT Quiz</h1>
+          <p class="home-subtitle">Manajemen Proyek Tangkas - ES234316</p>
+          <div class="home-badge">
+            <span class="dot"></span>
+            180 soal tersedia
+          </div>
+        </div>
+
+        <h2 class="section-title">Pilih Sumber Soal 🎮</h2>
+
+        <div class="source-cards">
+          <button class="source-card claude" onclick="selectSource('claude')">
+            <span class="source-card-icon">🤖</span>
+            <div class="source-card-name">Claude</div>
+            <div class="source-card-desc">Bank soal dari Claude AI</div>
+            <span class="source-card-count">📝 60 soal</span>
+            <span class="source-card-play">Play ▶</span>
+          </button>
+
+          <button class="source-card gemini" onclick="selectSource('gemini')">
+            <span class="source-card-icon">💎</span>
+            <div class="source-card-name">Gemini</div>
+            <div class="source-card-desc">Bank soal dari Gemini AI</div>
+            <span class="source-card-count">📝 60 soal</span>
+            <span class="source-card-play">Play ▶</span>
+          </button>
+
+          <button class="source-card chatgpt" onclick="selectSource('chatgpt')">
+            <span class="source-card-icon">🧠</span>
+            <div class="source-card-name">ChatGPT</div>
+            <div class="source-card-desc">Bank soal dari ChatGPT AI</div>
+            <span class="source-card-count">📝 60 soal</span>
+            <span class="source-card-play">Play ▶</span>
+          </button>
+        </div>
+
+        <!-- Pagination dots (decorative) -->
+        <div class="pagination-dots">
+          <div class="pagination-dot active"></div>
+          <div class="pagination-dot"></div>
+          <div class="pagination-dot"></div>
+        </div>
+      </div>
+
+      <!-- ========== CONFIG SCREEN ========== -->
+      <div id="screen-config" class="screen">
+        <div class="config-header">
+          <button class="btn-back" onclick="goHome()">←</button>
+          <h2 class="config-source-name" id="config-title"></h2>
+        </div>
+
+        <div class="filter-section">
+          <div class="filter-label">Tingkat Kesulitan</div>
+          <div class="filter-pills" id="level-filters">
+            <button
+              class="filter-pill active"
+              data-level="all"
+              onclick="toggleLevel(this)"
+            >
+              Semua
+            </button>
+            <button
+              class="filter-pill"
+              data-level="Mudah"
+              onclick="toggleLevel(this)"
+            >
+              🟢 Mudah
+            </button>
+            <button
+              class="filter-pill"
+              data-level="Sedang"
+              onclick="toggleLevel(this)"
+            >
+              🟡 Sedang
+            </button>
+            <button
+              class="filter-pill"
+              data-level="Sulit"
+              onclick="toggleLevel(this)"
+            >
+              🔴 Sulit
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-section">
+          <div class="filter-label">Urutan Soal</div>
+          <div class="filter-pills">
+            <button
+              class="filter-pill active"
+              data-order="shuffle"
+              onclick="toggleOrder(this)"
+            >
+              🔀 Acak
+            </button>
+            <button
+              class="filter-pill"
+              data-order="sequential"
+              onclick="toggleOrder(this)"
+            >
+              📋 Urut
+            </button>
+          </div>
+        </div>
+
+        <div class="config-summary" id="config-summary">
+          <div class="config-summary-row">
+            <span class="config-summary-label">Sumber</span>
+            <span class="config-summary-value" id="summary-source">-</span>
+          </div>
+          <div class="config-summary-row">
+            <span class="config-summary-label">Jumlah Soal</span>
+            <span class="config-summary-value" id="summary-count">-</span>
+          </div>
+          <div class="config-summary-row">
+            <span class="config-summary-label">Level</span>
+            <span class="config-summary-value" id="summary-level">-</span>
+          </div>
+        </div>
+
+        <button class="btn-start" id="btn-start-quiz" onclick="startQuiz()">
+          Mulai Quiz 🚀
+        </button>
+      </div>
+
+      <!-- ========== QUIZ SCREEN ========== -->
+      <div id="screen-quiz" class="screen">
+        <div class="quiz-top-bar">
+          <button class="btn-back" onclick="confirmQuit()">←</button>
+          <span class="quiz-progress-text" id="quiz-progress-text"></span>
+          <span class="quiz-source-pill" id="quiz-source-pill"></span>
+        </div>
+
+        <div class="progress-bar" id="progress-bar"></div>
+
+        <div class="question-card" id="question-card">
+          <span class="question-level-pill" id="q-level"></span>
+          <div class="question-topic" id="q-topic"></div>
+          <div class="question-text" id="q-text"></div>
+        </div>
+
+        <div class="options-container" id="options-container"></div>
+
+        <div id="explanation-area"></div>
+
+        <div class="quiz-action-bar" id="quiz-actions"></div>
+      </div>
+
+      <!-- ========== RESULT SCREEN ========== -->
+      <div id="screen-result" class="screen result-screen">
+        <div class="result-celebration">
+          <span class="result-mascot" id="result-mascot"></span>
+          <div class="result-score-pill" id="result-score"></div>
+          <div class="result-label">Poin Kamu</div>
+          <div class="result-message" id="result-message"></div>
+        </div>
+
+        <div class="result-stats" id="result-stats"></div>
+
+        <div class="result-review-header">
+          <h3>Review Jawaban</h3>
+        </div>
+        <div class="result-review-body" id="result-review-body"></div>
+
+        <button class="btn-home" onclick="goHome()">🏠 Kembali ke Home</button>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <div class="bottom-bar" id="bottom-bar">
+      <button class="bottom-bar-item active-tab" onclick="goHome()">
+        📚 Quiz
+      </button>
+      <button
+        class="bottom-bar-item inactive-tab"
+        title="Info"
+        onclick="showInfo()"
+      >
+        ℹ️
+      </button>
+    </div>
+
+    <!-- ===== SOAL DATA EMBEDDED ===== -->
+    <script id="soal-data" type="application/json">
+      SOAL_DATA_PLACEHOLDER
+    </script>
+
+    <script>
+      // ============================================
+      // DATA & STATE
+      // ============================================
+      let SOAL_DATA = {};
+      let state = {
+        source: null,
+        level: "all",
+        order: "shuffle",
+        questions: [],
+        currentIndex: 0,
+        selectedOption: null,
+        answered: false,
+        answers: [], // { questionIndex, selected, correct, isCorrect }
+      };
+
+      // Load embedded data
+      function loadData() {
+        const el = document.getElementById("soal-data");
+        try {
+          SOAL_DATA = JSON.parse(el.textContent);
+        } catch (e) {
+          // If data is placeholder, try loading from external file
+          fetch("soal-data.json")
+            .then((r) => r.json())
+            .then((d) => {
+              SOAL_DATA = d;
+            })
+            .catch(() => alert("Gagal memuat data soal!"));
+        }
+      }
+      loadData();
+
+      // ============================================
+      // NAVIGATION
+      // ============================================
+      function showScreen(id) {
+        document
+          .querySelectorAll(".screen")
+          .forEach((s) => s.classList.remove("active"));
+        document.getElementById(`screen-${id}`).classList.add("active");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function goHome() {
+        state = {
+          source: null,
+          level: "all",
+          order: "shuffle",
+          questions: [],
+          currentIndex: 0,
+          selectedOption: null,
+          answered: false,
+          answers: [],
+        };
+        showScreen("home");
+        // Reset filter pills
+        document
+          .querySelectorAll("#level-filters .filter-pill")
+          .forEach((p) => p.classList.remove("active"));
+        document
+          .querySelector('#level-filters .filter-pill[data-level="all"]')
+          .classList.add("active");
+      }
+
+      function confirmQuit() {
+        if (state.answers.length > 0) {
+          if (confirm("Yakin mau keluar? Progress quiz akan hilang.")) {
+            goHome();
+          }
+        } else {
+          goHome();
+        }
+      }
+
+      function showInfo() {
+        alert(
+          "Latihan Soal MPT Quiz\n\n180 soal dari 3 sumber AI berbeda.\nMata kuliah: Manajemen Proyek Tangkas (ES234316)\n\nSelamat belajar! 🎓",
+        );
+      }
+
+      // ============================================
+      // SOURCE SELECTION
+      // ============================================
+      function selectSource(source) {
+        state.source = source;
+        const names = {
+          claude: "Claude",
+          gemini: "Gemini",
+          chatgpt: "ChatGPT",
+        };
+        document.getElementById("config-title").textContent = names[source];
+        updateConfigSummary();
+        showScreen("config");
+      }
+
+      // ============================================
+      // FILTER CONTROLS
+      // ============================================
+      function toggleLevel(btn) {
+        const level = btn.dataset.level;
+        document
+          .querySelectorAll("#level-filters .filter-pill")
+          .forEach((p) => p.classList.remove("active"));
+        btn.classList.add("active");
+        state.level = level;
+        updateConfigSummary();
+      }
+
+      function toggleOrder(btn) {
+        document
+          .querySelectorAll("[data-order]")
+          .forEach((p) => p.classList.remove("active"));
+        btn.classList.add("active");
+        state.order = btn.dataset.order;
+      }
+
+      function updateConfigSummary() {
+        const names = {
+          claude: "Claude",
+          gemini: "Gemini",
+          chatgpt: "ChatGPT",
+        };
+        document.getElementById("summary-source").textContent =
+          names[state.source] || "-";
+
+        const allQ = SOAL_DATA[state.source] || [];
+        const filtered =
+          state.level === "all"
+            ? allQ
+            : allQ.filter((q) => q.level === state.level);
+
+        document.getElementById("summary-count").textContent =
+          filtered.length + " soal";
+        document.getElementById("summary-level").textContent =
+          state.level === "all" ? "Semua Level" : state.level;
+
+        document.getElementById("btn-start-quiz").disabled =
+          filtered.length === 0;
+      }
+
+      // ============================================
+      // QUIZ START
+      // ============================================
+      function startQuiz() {
+        const allQ = SOAL_DATA[state.source] || [];
+        let filtered =
+          state.level === "all"
+            ? [...allQ]
+            : allQ.filter((q) => q.level === state.level);
+
+        if (state.order === "shuffle") {
+          filtered = shuffleArray(filtered);
+        }
+
+        state.questions = filtered;
+        state.currentIndex = 0;
+        state.selectedOption = null;
+        state.answered = false;
+        state.answers = [];
+
+        renderQuiz();
+        showScreen("quiz");
+      }
+
+      function shuffleArray(arr) {
+        const a = [...arr];
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      }
+
+      // ============================================
+      // QUIZ RENDERING
+      // ============================================
+      function renderQuiz() {
+        const q = state.questions[state.currentIndex];
+        const total = state.questions.length;
+        const current = state.currentIndex + 1;
+        const names = {
+          claude: "Claude",
+          gemini: "Gemini",
+          chatgpt: "ChatGPT",
+        };
+
+        // Top bar
+        document.getElementById("quiz-progress-text").textContent =
+          `${current} / ${total}`;
+        document.getElementById("quiz-source-pill").textContent =
+          names[state.source];
+
+        // Progress bar
+        const progressBar = document.getElementById("progress-bar");
+        progressBar.innerHTML = "";
+        for (let i = 0; i < total; i++) {
+          const step = document.createElement("div");
+          step.className = "progress-step";
+          if (i < state.answers.length) {
+            step.classList.add(state.answers[i].isCorrect ? "done" : "wrong");
+          } else if (i === state.currentIndex) {
+            step.classList.add("current");
+          }
+          progressBar.appendChild(step);
+        }
+
+        // Question card
+        const levelClass = q.level.toLowerCase();
+        document.getElementById("q-level").textContent = q.level;
+        document.getElementById("q-level").className =
+          `question-level-pill ${levelClass}`;
+        document.getElementById("q-topic").textContent = q.topic
+          ? `📌 ${q.topic}`
+          : "";
+        document.getElementById("q-text").textContent = q.question;
+
+        // Options
+        const optionsContainer = document.getElementById("options-container");
+        optionsContainer.innerHTML = "";
+        const letters = ["A", "B", "C", "D"];
+        for (const letter of letters) {
+          if (!q.options[letter]) continue;
+          const pill = document.createElement("div");
+          pill.className = "option-pill";
+          pill.dataset.letter = letter;
+          pill.innerHTML = `
+          <div class="option-letter">${letter}</div>
+          <div class="option-text">${q.options[letter]}</div>
+        `;
+          pill.addEventListener("click", () => selectOption(letter));
+          optionsContainer.appendChild(pill);
+        }
+
+        // Clear explanation
+        document.getElementById("explanation-area").innerHTML = "";
+
+        // Action bar
+        state.selectedOption = null;
+        state.answered = false;
+        renderActions();
+      }
+
+      function selectOption(letter) {
+        if (state.answered) return;
+        state.selectedOption = letter;
+
+        document.querySelectorAll(".option-pill").forEach((p) => {
+          p.classList.remove("selected");
+          if (p.dataset.letter === letter) {
+            p.classList.add("selected");
+          }
+        });
+
+        renderActions();
+      }
+
+      function renderActions() {
+        const actions = document.getElementById("quiz-actions");
+        if (!state.answered) {
+          actions.innerHTML = `
+          <button class="btn-submit" ${!state.selectedOption ? "disabled" : ""} onclick="submitAnswer()">
+            Submit Answer ✓
+          </button>
+        `;
+        } else {
+          const isLast = state.currentIndex >= state.questions.length - 1;
+          if (isLast) {
+            actions.innerHTML = `
+            <button class="btn-next" onclick="showResults()">
+              Lihat Hasil 🏆
+            </button>
+          `;
+          } else {
+            actions.innerHTML = `
+            <button class="btn-next" onclick="nextQuestion()">
+              Lanjut →
+            </button>
+          `;
+          }
+        }
+      }
+
+      function submitAnswer() {
+        if (!state.selectedOption) return;
+
+        const q = state.questions[state.currentIndex];
+        const isCorrect = state.selectedOption === q.answer;
+        state.answered = true;
+
+        state.answers.push({
+          questionIndex: state.currentIndex,
+          selected: state.selectedOption,
+          correct: q.answer,
+          isCorrect,
+        });
+
+        // Update option pills
+        document.querySelectorAll(".option-pill").forEach((p) => {
+          p.classList.add("disabled");
+          const letter = p.dataset.letter;
+          if (letter === q.answer) {
+            p.classList.add("correct");
+          } else if (letter === state.selectedOption && !isCorrect) {
+            p.classList.add("wrong");
+          } else {
+            p.classList.add("dimmed");
+          }
+        });
+
+        // Update progress bar for current step
+        const steps = document.querySelectorAll(".progress-step");
+        if (steps[state.currentIndex]) {
+          steps[state.currentIndex].classList.remove("current");
+          steps[state.currentIndex].classList.add(isCorrect ? "done" : "wrong");
+        }
+
+        // Show explanation
+        showExplanation(q, isCorrect);
+
+        // Update actions
+        renderActions();
+      }
+
+      function showExplanation(q, isCorrect) {
+        const area = document.getElementById("explanation-area");
+        const headerClass = isCorrect ? "correct" : "wrong";
+        const headerIcon = isCorrect ? "✅" : "❌";
+        const headerText = isCorrect ? "Benar!" : "Salah!";
+
+        let explanationsHTML = "";
+        for (const letter of ["A", "B", "C", "D"]) {
+          const expl = q.explanations[letter];
+          if (!expl) continue;
+          const isAnswer = letter === q.answer;
+          explanationsHTML += `
+          <div class="explanation-item ${isAnswer ? "is-answer" : ""}">
+            <strong>${letter}.</strong> ${expl}
+          </div>
+        `;
+        }
+
+        area.innerHTML = `
+        <div class="explanation-card">
+          <div class="explanation-header ${headerClass}">
+            ${headerIcon} ${headerText} Jawaban: ${q.answer}
+          </div>
+          ${explanationsHTML}
+        </div>
+      `;
+
+        // Scroll to explanation
+        setTimeout(() => {
+          area.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }, 100);
+      }
+
+      function nextQuestion() {
+        state.currentIndex++;
+        state.selectedOption = null;
+        state.answered = false;
+        renderQuiz();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // ============================================
+      // RESULTS
+      // ============================================
+      function showResults() {
+        const total = state.answers.length;
+        const correct = state.answers.filter((a) => a.isCorrect).length;
+        const wrong = total - correct;
+        const percent = Math.round((correct / total) * 100);
+
+        // Mascot & message
+        let mascot, message;
+        if (percent >= 90) {
+          mascot = "🏆";
+          message = "Luar Biasa!";
+        } else if (percent >= 70) {
+          mascot = "🎉";
+          message = "Hebat!";
+        } else if (percent >= 50) {
+          mascot = "💪";
+          message = "Lumayan!";
+        } else {
+          mascot = "📖";
+          message = "Ayo Belajar Lagi!";
+        }
+
+        document.getElementById("result-mascot").textContent = mascot;
+        document.getElementById("result-score").textContent = `${percent}%`;
+        document.getElementById("result-message").textContent = message;
+
+        // Stats
+        document.getElementById("result-stats").innerHTML = `
+        <div class="stat-card">
+          <div class="stat-value">${total}</div>
+          <div class="stat-label">Total</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value correct-val">${correct}</div>
+          <div class="stat-label">Benar</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value wrong-val">${wrong}</div>
+          <div class="stat-label">Salah</div>
+        </div>
+      `;
+
+        // Review items
+        const reviewBody = document.getElementById("result-review-body");
+        reviewBody.innerHTML = "";
+
+        state.answers.forEach((a, idx) => {
+          const q = state.questions[a.questionIndex];
+          const itemClass = a.isCorrect ? "review-correct" : "review-wrong";
+          const statusClass = a.isCorrect ? "correct-status" : "wrong-status";
+          const statusText = a.isCorrect ? "✓ Benar" : "✗ Salah";
+
+          let detailHTML = "";
+          for (const letter of ["A", "B", "C", "D"]) {
+            let badgeStyle = "";
+            let badgeLabel = "";
+            if (letter === q.answer && letter === a.selected) {
+              badgeStyle = "background: rgba(52,211,153,0.15); color: #059669;";
+              badgeLabel = "✓ Jawaban Kamu (Benar)";
+            } else if (letter === q.answer) {
+              badgeStyle = "background: rgba(52,211,153,0.15); color: #059669;";
+              badgeLabel = "✓ Jawaban Benar";
+            } else if (letter === a.selected) {
+              badgeStyle = "background: rgba(239,68,68,0.15); color: #dc2626;";
+              badgeLabel = "✗ Jawaban Kamu";
+            }
+
+            detailHTML += `<div class="review-answer-row">
+            <strong>${letter}.</strong> ${q.options[letter]}
+            ${badgeLabel ? `<span class="review-answer-badge" style="${badgeStyle}">${badgeLabel}</span>` : ""}
+          </div>`;
+          }
+
+          // Add explanations
+          let explHTML = "";
+          for (const letter of ["A", "B", "C", "D"]) {
+            if (q.explanations[letter]) {
+              explHTML += `<div style="margin-top:4px; color: var(--text-secondary);"><strong>${letter}.</strong> ${q.explanations[letter]}</div>`;
+            }
+          }
+
+          const item = document.createElement("div");
+          item.className = `review-item ${itemClass}`;
+          item.innerHTML = `
+          <div class="review-item-header">
+            <span class="review-item-num">Soal ${idx + 1}</span>
+            <span class="review-item-status ${statusClass}">${statusText}</span>
+          </div>
+          <div class="review-item-question">${q.question}</div>
+          <div class="review-detail">
+            ${detailHTML}
+            <div style="margin-top:10px; padding-top:8px; border-top: 1px solid #e0ddd4;">
+              <strong style="font-size:12px;">📖 Penjelasan:</strong>
+              ${explHTML}
+            </div>
+          </div>
+        `;
+          item.addEventListener("click", () => {
+            const detail = item.querySelector(".review-detail");
+            detail.classList.toggle("open");
+          });
+          reviewBody.appendChild(item);
+        });
+
+        showScreen("result");
+      }
+    </script>
+  </body>
+</html>
