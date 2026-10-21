@@ -113,7 +113,7 @@
         z-index: 1;
         max-width: 480px;
         margin: 0 auto;
-        padding: 20px 20px 100px;
+        padding: 20px 20px 40px;
         min-height: 100vh;
       }
 
@@ -978,76 +978,6 @@
         transform: translateY(-2px);
       }
 
-      /* ============================================ */
-      /* PAGINATION DOTS                             */
-      /* ============================================ */
-      .pagination-dots {
-        display: flex;
-        justify-content: center;
-        gap: 6px;
-        margin: 20px 0;
-      }
-      .pagination-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: var(--dark-button);
-        opacity: 0.2;
-        transition: all 0.3s;
-      }
-      .pagination-dot.active {
-        width: 24px;
-        border-radius: var(--radius-pill);
-        background: var(--pink);
-        opacity: 1;
-      }
-
-      /* ============================================ */
-      /* FLOATING BOTTOM BAR (decorative)            */
-      /* ============================================ */
-      .bottom-bar {
-        position: fixed;
-        bottom: 16px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--dark-button);
-        border-radius: var(--radius-pill);
-        padding: 6px;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        z-index: 100;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-      }
-      .bottom-bar-item {
-        border-radius: var(--radius-pill);
-        border: none;
-        font-family: inherit;
-        font-size: 13px;
-        font-weight: 600;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        padding: 10px 16px;
-        transition: all 0.2s;
-      }
-      .bottom-bar-item.active-tab {
-        background: var(--action-green);
-        color: var(--text-on-dark);
-      }
-      .bottom-bar-item.inactive-tab {
-        background: var(--bg-card-white);
-        color: var(--text-primary);
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        padding: 0;
-        justify-content: center;
-      }
-      .bottom-bar-item.inactive-tab:hover {
-        background: #f0f0f0;
-      }
 
       /* ============================================ */
       /* RESPONSIVE                                  */
@@ -1114,12 +1044,6 @@
           </button>
         </div>
 
-        <!-- Pagination dots (decorative) -->
-        <div class="pagination-dots">
-          <div class="pagination-dot active"></div>
-          <div class="pagination-dot"></div>
-          <div class="pagination-dot"></div>
-        </div>
       </div>
 
       <!-- ========== CONFIG SCREEN ========== -->
@@ -1246,19 +1170,6 @@
       </div>
     </div>
 
-    <!-- Bottom Navigation Bar -->
-    <div class="bottom-bar" id="bottom-bar">
-      <button class="bottom-bar-item active-tab" onclick="goHome()">
-        📚 Quiz
-      </button>
-      <button
-        class="bottom-bar-item inactive-tab"
-        title="Info"
-        onclick="showInfo()"
-      >
-        ℹ️
-      </button>
-    </div>
 
     <!-- ===== SOAL DATA EMBEDDED ===== -->
     <script id="soal-data" type="application/json">
