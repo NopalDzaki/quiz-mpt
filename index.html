@@ -980,11 +980,35 @@
 
 
       /* ============================================ */
+      /* WATERMARK                                    */
+      /* ============================================ */
+      .watermark-container {
+        text-align: center;
+        margin-top: 36px;
+        padding-bottom: 8px;
+      }
+      .watermark {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 16px;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        border-radius: var(--radius-pill);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        color: var(--text-secondary);
+        backdrop-filter: blur(6px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      }
+
+      /* ============================================ */
       /* RESPONSIVE                                  */
       /* ============================================ */
       @media (max-width: 500px) {
         .app {
-          padding: 16px 16px 90px;
+          padding: 16px 16px 32px;
         }
         .home-title {
           font-size: 24px;
@@ -1009,7 +1033,7 @@
         <div class="home-header">
           <span class="home-mascot">📚</span>
           <h1 class="home-title">Latihan Soal<br />MPT Quiz</h1>
-          <p class="home-subtitle">reo</p>
+          <p class="home-subtitle">Manajemen Proyek Tangkas</p>
           <div class="home-badge">
             <span class="dot"></span>
             180 soal tersedia
@@ -1166,6 +1190,13 @@
         <div class="result-review-body" id="result-review-body"></div>
 
         <button class="btn-home" onclick="goHome()">🏠 Kembali ke Home</button>
+      </div>
+
+      <!-- Watermark -->
+      <div class="watermark-container">
+        <div class="watermark">
+          <span>Made by King Promting - nopal</span>
+        </div>
       </div>
     </div>
 
